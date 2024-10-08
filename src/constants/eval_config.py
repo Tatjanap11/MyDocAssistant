@@ -7,6 +7,6 @@ from ragas.metrics import (
 )
 
 LLM_MODEL = "mistral-large-latest"
-LLM_TEMPERATURE = 0.7
+LLM_TEMPERATURE = 0.2
 EMBEDDER_MODEL = "text-embedding-ada-002"
 METRICS = [faithfulness, answer_relevancy, context_utilization]

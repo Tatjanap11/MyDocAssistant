@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")
 
 # import src
 from src.constants.eval_config import METRICS
-from src.constants.prompt import LLAMA_3_PROMPT, SYSTEM_MESSAGE, USER_MESSAGE
+from src.constants.prompt import LLAMA_3_PROMPT, SYSTEM_MESSAGE, USER_MESSAGE,MISTRAL_7B_PROMPT
 from src.constants.questions import QUESTIONS
 from src.models.rag import RAG
 from src.utils.evaluation import MetricsEvaluator
@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 def main():
     config_path = r"C:\Users\tatja\Desktop\RAGTask\Code\LokaDocAssistant/configs/configuration.yaml"
     template = LLAMA_3_PROMPT
+    # template=MISTRAL_7B_PROMPT
     system_message = SYSTEM_MESSAGE
     user_message = USER_MESSAGE
     metric_names = [metric.name for metric in METRICS]

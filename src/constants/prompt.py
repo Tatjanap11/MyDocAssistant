@@ -17,6 +17,22 @@ This is the question:
 <|start_header_id|>assistant<|end_header_id|>
 """
 
+MISTRAL_7B_PROMPT = """
+<s>[INST]
+System: {system_message}
+User: {user_message}
+
+-----------
+This is the context:
+{{context}}
+
+-----------
+This is the question:
+{{question}}
+
+[/INST]
+"""
+
 SYSTEM_MESSAGE = """
 You are an AI assistant that helps users with answering queries about documentation. You have access to a large collection of documents 
 from AWS documentation, particularly SageMaker and have to answer in details and explain clearly.

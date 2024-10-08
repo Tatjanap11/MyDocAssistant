@@ -4,6 +4,7 @@ import logging
 import os
 from typing import Union
 
+from langchain_groq import ChatGroq
 from langchain_mistralai import ChatMistralAI
 from langchain_openai import OpenAIEmbeddings
 from ragas.embeddings.base import LangchainEmbeddingsWrapper
@@ -68,11 +69,18 @@ class MetricsEvaluator:
         Initialize the LLM and Embedder models for evaluation
         """
         logger.info("Initializing LLM and Embedder models")
-        self.eval_llm = ChatMistralAI(
+        if("llama" in LLM_MODEL):
+            self.eval_llm = ChatGroq(
             model=LLM_MODEL,
             temperature=LLM_TEMPERATURE,
-            api_key=os.environ["MISTRAL_API_KEY"],
+            api_key=os.environ["GROQ_API_KEY"],
         )
+        else:
+            self.eval_llm = ChatMistralAI(
+                model=LLM_MODEL,
+                temperature=LLM_TEMPERATURE,
+                api_key=os.environ["MISTRAL_API_KEY"],
+            )
         self.eval_embedder = OpenAIEmbeddings(
             model=EMBEDDER_MODEL, api_key=os.environ["OPENAI_API_KEY"]
         )
