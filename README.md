@@ -47,14 +47,15 @@ python src/workflows/ingestion_workflows.py
 ```bash
 python src/workflows/inference_workflows.py
  ```
-
-> [!NOTE]
-> Make sure that the path to configuration_llama.yaml or configuration_mistral.yaml and any other resources used in the DataIngester class and RAG class are correct and that the required files are present in the specified directories, as well as provide the path to the configuration files before running the workflows. For evaluation the eval_config.py parameters should also be set correctly.
-
 3. To analyse and compare experiments use mlflow by running the command in the current directory
 ```bash
 mlflow ui
  ```
+
+> [!NOTE]
+> Make sure that the path to configuration_llama.yaml or configuration_mistral.yaml and any other resources used in the DataIngester class and RAG class are correct and that the required files are present in the specified directories, as well as provide the path to the configuration files before running the workflows. For evaluation the eval_config.py parameters should also be set correctly.
+
+
 
 ## Directory Structure
 
