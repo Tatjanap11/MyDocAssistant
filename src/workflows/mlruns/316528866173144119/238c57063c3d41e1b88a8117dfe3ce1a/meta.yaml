@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/tatja/Desktop/RAGTask/Code/LokaDocAssistant/src/workflows/mlruns/316528866173144119/238c57063c3d41e1b88a8117dfe3ce1a/artifacts
+end_time: 1728338173793
+entry_point_name: ''
+experiment_id: '316528866173144119'
+lifecycle_stage: active
+run_id: 238c57063c3d41e1b88a8117dfe3ce1a
+run_name: rogue-auk-610
+run_uuid: 238c57063c3d41e1b88a8117dfe3ce1a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728338169507
+status: 4
+tags: []
+user_id: Tatjana

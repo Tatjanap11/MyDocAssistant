@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/tatja/Desktop/RAGTask/Code/LokaDocAssistant/src/workflows/mlruns/316528866173144119/7a75b124b72c489b864e301df12d2a8e/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '316528866173144119'
+lifecycle_stage: active
+run_id: 7a75b124b72c489b864e301df12d2a8e
+run_name: clumsy-colt-430
+run_uuid: 7a75b124b72c489b864e301df12d2a8e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728338211345
+status: 1
+tags: []
+user_id: Tatjana

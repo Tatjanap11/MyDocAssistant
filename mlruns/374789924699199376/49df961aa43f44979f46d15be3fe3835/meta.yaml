@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/tatja/Desktop/RAGTask/Code/LokaDocAssistant/mlruns/374789924699199376/49df961aa43f44979f46d15be3fe3835/artifacts
+end_time: 1728340434262
+entry_point_name: ''
+experiment_id: '374789924699199376'
+lifecycle_stage: active
+run_id: 49df961aa43f44979f46d15be3fe3835
+run_name: clean-shrew-955
+run_uuid: 49df961aa43f44979f46d15be3fe3835
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728340095260
+status: 3
+tags: []
+user_id: Tatjana

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/tatja/Desktop/RAGTask/Code/LokaDocAssistant/mlruns/286135813798879729/599cbaa8ea2c4f80a6752ed10aaa11a5/artifacts
+end_time: 1728316193942
+entry_point_name: ''
+experiment_id: '286135813798879729'
+lifecycle_stage: active
+run_id: 599cbaa8ea2c4f80a6752ed10aaa11a5
+run_name: exp1
+run_uuid: 599cbaa8ea2c4f80a6752ed10aaa11a5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728316187685
+status: 3
+tags: []
+user_id: Tatjana

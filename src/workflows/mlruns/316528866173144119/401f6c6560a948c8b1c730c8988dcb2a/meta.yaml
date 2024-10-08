@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/tatja/Desktop/RAGTask/Code/LokaDocAssistant/src/workflows/mlruns/316528866173144119/401f6c6560a948c8b1c730c8988dcb2a/artifacts
+end_time: 1728338020768
+entry_point_name: ''
+experiment_id: '316528866173144119'
+lifecycle_stage: active
+run_id: 401f6c6560a948c8b1c730c8988dcb2a
+run_name: intelligent-boar-117
+run_uuid: 401f6c6560a948c8b1c730c8988dcb2a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728338017577
+status: 4
+tags: []
+user_id: Tatjana
