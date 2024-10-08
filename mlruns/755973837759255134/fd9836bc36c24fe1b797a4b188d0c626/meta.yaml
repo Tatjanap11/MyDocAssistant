@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/tatja/Desktop/RAGTask/Code/LokaDocAssistant/mlruns/755973837759255134/fd9836bc36c24fe1b797a4b188d0c626/artifacts
+end_time: 1728422405974
+entry_point_name: ''
+experiment_id: '755973837759255134'
+lifecycle_stage: active
+run_id: fd9836bc36c24fe1b797a4b188d0c626
+run_name: welcoming-calf-2
+run_uuid: fd9836bc36c24fe1b797a4b188d0c626
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1728422067378
+status: 3
+tags: []
+user_id: Tatjana

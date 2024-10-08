@@ -1,1 +1,0 @@
-[{"name": "RetrievalQA", "type": "CHAIN", "inputs": ["query", "context"]}, {"name": "VectorStoreRetriever", "type": "RETRIEVER"}]

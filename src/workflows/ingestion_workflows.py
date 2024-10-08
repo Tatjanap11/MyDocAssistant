@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    config_path = "./configs/configuration.yaml"
+    config_path = "./configs/configuration_llama.yaml"
     config = load_yaml_configuration(config_path)
     data_ingester = DataIngester(config)
     data_ingester.initialize_elements()

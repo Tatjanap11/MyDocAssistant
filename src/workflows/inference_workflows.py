@@ -11,7 +11,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 # import src
-from src.constants.eval_config import METRICS
+from src.constants.eval_config import METRICS,LLM_MODEL
 from src.constants.prompt import LLAMA_3_PROMPT, SYSTEM_MESSAGE, USER_MESSAGE,MISTRAL_7B_PROMPT
 from src.constants.questions import QUESTIONS
 from src.models.rag import RAG
@@ -26,9 +26,11 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    config_path = r"C:\Users\tatja\Desktop\RAGTask\Code\LokaDocAssistant/configs/configuration.yaml"
-    template = LLAMA_3_PROMPT
-    # template=MISTRAL_7B_PROMPT
+    config_path = r"./configs/configuration_mixtral.yaml"
+    if "llama" in config_path:
+        template = LLAMA_3_PROMPT
+    else:
+        template=MISTRAL_7B_PROMPT
     system_message = SYSTEM_MESSAGE
     user_message = USER_MESSAGE
     metric_names = [metric.name for metric in METRICS]
@@ -99,6 +101,8 @@ def main():
 
         logger.info("Evaluation completed")
         eval_df.to_csv("evaluation_results.csv")
+        mlflow.log_param("llm_judge",LLM_MODEL)
+        mlflow.log_artifact("evaluation_results.csv")
 
 
 if __name__ == "__main__":

@@ -1,1 +1,0 @@
-{'search_type': 'similarity', 'retriever_kwargs': {'k': 3}}

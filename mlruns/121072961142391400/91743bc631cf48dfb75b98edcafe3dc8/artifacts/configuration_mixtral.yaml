@@ -1,0 +1,26 @@
+experiment_name: "LLM_Inference"
+
+llm:
+  model: mixtral-8x7b-32768
+  max_tokens: 2048
+  temperature: 0
+
+embedder:
+  model: text-embedding-ada-002
+
+chunker:
+  chunk_size: 1500
+  chunk_overlap: 100
+
+vector_store:
+  collection_name: "sagemaker_documentation"
+  dimension: 1536
+  distance: Cosine
+
+retriever:
+  search_type: "similarity"
+  retriever_kwargs:
+    k: 3
+
+data:
+  raw_path: "./data/sagemaker_documentation/"
