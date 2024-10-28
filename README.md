@@ -7,6 +7,7 @@ MyDocAssistant is a proof of concept (POC) tool designed to help developers effi
 - [Installation](#installation)
 - [Usage](#usage)
 - [Directory Structure](#directory-structure)
+- [Detailed Explanation](#detailed-explanation)
 
 ## Features
 
