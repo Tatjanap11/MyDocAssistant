@@ -1,5 +1,5 @@
-# LokaDocAssistant
-LokaDocAssistant is a proof of concept (POC) tool designed to help developers efficiently navigate AWS documentation. This tool reduces the time spent searching for information by leveraging natural language processing (NLP) techniques to understand developer queries and retrieve relevant answers from indexed documentation.
+# MyDocAssistant
+MyDocAssistant is a proof of concept (POC) tool designed to help developers efficiently navigate AWS documentation. This tool reduces the time spent searching for information by leveraging natural language processing (NLP) techniques to understand developer queries and retrieve relevant answers from indexed documentation.
 
 ## Table of Contents
 
@@ -19,8 +19,8 @@ LokaDocAssistant is a proof of concept (POC) tool designed to help developers ef
 
 1. Clone the repository:
 ```bash
-git clone https://<user>:<public_token>@github.com/yourusername/LokaDocAssistant.git
-cd LokaDocAssistant
+git clone https://<user>:<public_token>@github.com/yourusername/MyDocAssistant.git
+cd MyDocAssistant
 ```
 2. Create a virtual environment and activate it:
 ```bash
@@ -60,7 +60,7 @@ mlflow ui
 ## Directory Structure
 
 ```bash
-LokaDocAssistant
+MyDocAssistant
 ├── configs
 │   └── configuration.yaml          # Configuration file for the application
 ├── data
