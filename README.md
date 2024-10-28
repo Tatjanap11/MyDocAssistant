@@ -85,147 +85,97 @@ MyDocAssistant
 ├── requirements.txt                # Project dependencies
 └── Senior_ML_Tech_Assessment.pdf   # Assessment document for review
 ```
-# # Answers to suggested questions
-
-### 1. **Does your solution solve the company’s pain points? What are they?**
-
-**Answer**:  
-Main key points from Company X were:
-
-•	Development of a system to assist developers in searching through AWS Sagemaker documentation (initially, a small subset was provided).
-
-•	The system must deliver fast search results, minimizing the need to manually browse through documentation.
-
-•	It should always provide up-to-date information from AWS Sagemaker documentation, and in later stages, from internal documentation as well.
-
-•	The system should indicate the exact source of information for each result.
-
-•	It must handle sensitive, proprietary information, ensuring compliance with external sharing restrictions and geographical limitations.
-
-The proposed system is designed to address all requirements from Company X. The RAG(Retrieval Augmented Generation) system is built on the AWS Sagemaker documentation, specifically focusing on a provided subset. It effectively retrieves relevant information and generates trustworthy and reliable answers to user queries. It also identifies the source of the information from which the answers are derived. However, it currently lacks the capability to consistently access the latest updates from the AWS Sagemaker documentation, as well as internal documentation in future iterations. This can be resolved by implementing a mechanism to check if a document is new or if there have been updates to an existing document and updating the vector database with new content, including internal documents. The vector database used in the POC is Qdrant, which can be configured to enforce geographical restrictions. For the proof of concept, it is set to the EU-East region, but there is a paid plan($0.03566/h) available that can be configured to operate in the US.
 
 
----
+# AWS Sagemaker Documentation Search System (RAG-based)
 
-### 2. **What is the name of the LLM Pattern you’ve used in this project?**  
-Since names are not yet standardized, feel free to elaborate on the pattern you used.
+This project develops a system to facilitate efficient search through AWS Sagemaker documentation, initially focused on a small subset of this documentation. The system minimizes manual browsing by delivering quick, accurate search results and supports future integration with internal, sensitive documentation while maintaining compliance with data management and geographical restrictions.
 
-**Answer**:  
-As mentioned in answer 1, I used a RAG system as POC to build a tool for searching through large amount of documentation.
-Here's a brief elaboration on the pattern:
+## Key Project Objectives
 
-Retrieval Component: The system first retrieves relevant documents or chunks from a vector store based on the user’s query. This ensures that the information used for generating answers is contextually relevant and up-to-date.
+- **Efficient Search**: Enables developers to quickly find relevant information in AWS Sagemaker documentation, minimizing time spent manually browsing.
+- **Up-to-Date Information**: Provides current information from AWS Sagemaker documentation, with plans to integrate internal documentation updates in later stages.
+- **Traceability**: Each search result includes the exact source of information.
+- **Sensitive Data Compliance**: Supports compliance with external sharing restrictions and geographical limitations for handling sensitive information.
 
-Generation Component: After retrieving relevant information, a language model (ex. Llama3-8B) generates responses by synthesizing the retrieved data. This step allows the system to provide detailed, coherent answers that are tailored to the specific query.
+Built on a Retrieval Augmented Generation (RAG) system, this solution retrieves relevant documentation sections and generates coherent answers based on provided AWS Sagemaker documentation. The current vector database, **Qdrant**, operates in the EU-East region (with an optional US-based plan available).
 
-Benefits: By integrating retrieval and generation, RAG allows for handling large volumes of documentation effectively, improving the accuracy of responses, and reducing the reliance on outdated or irrelevant information. This pattern is particularly suitable for use cases involving extensive documentation, such as the AWS documentation provided for this proof of concept, while also being adaptable for future integration of internal, sensitive documents.
+## Project Components and Patterns
 
----
+### Retrieval Augmented Generation (RAG) Pattern
 
-### 3. **What tools did you use? Why did you select them?**
+The RAG-based approach includes:
 
-**Answer**:  
+1. **Retrieval Component**: Retrieves relevant document sections from a vector store, ensuring contextually relevant and updated information for each query.
+2. **Generation Component**: Generates detailed, coherent responses tailored to the query by synthesizing retrieved data.
 
-In this project, I utilized a variety of tools to enhance the functionality and performance of the solution:
+This pattern supports efficient handling of extensive documentation, optimizing accuracy, and reducing reliance on outdated or irrelevant information.
 
-•	LangChain: I selected this framework for its capabilities in loading and splitting data, managing the embeddings model, and initializing and ingesting data into the vector store. It also facilitated the implementation of LLM models and the RetrievalQA chain. LangChain streamlines the integration of various modules, making the application easier to build and maintain.
+## Tools and Frameworks
 
-•	Qdrant: I chose Qdrant as the vector store due to its high-performance capabilities in managing and searching through extensive sets of embeddings. Its design supports real-time vector similarity searches, which are essential for efficiently retrieving relevant documents based on user queries.
+- **LangChain**: Used for data loading, splitting, embedding management, and vector store initialization. Simplifies integration of large language models and RetrievalQA.
+- **Qdrant**: High-performance vector store for managing and searching embeddings, enabling efficient document retrieval.
+- **API Providers**: Integration with OpenAI, Groq, and Mistral APIs for advanced model access.
+- **Ragas**: Tool for system performance evaluation using retrieval and generation metrics.
+- **MLflow**: Tracks model parameters, metrics, and artifacts to monitor and compare model performance over time.
 
-•	OpenAI, Groq, and Mistral as API providers to generate keys in order to use the wrappers in LangChain which enables  seamless access to advanced models.
+## Model Selection
 
-•	Ragas: I employed Ragas to evaluate the system's performance, leveraging its comprehensive suite of metrics for assessing information retrieval and generation tasks. This tool allows for thorough evaluation of the accuracy and relevance of the model's responses.
+For optimal balance between speed and performance, **Llama-3.1-8B** and **Mixtral-7x8B** models were selected:
 
-•	MLflow: I integrated MLflow to track experiments and ensure reproducibility. This platform enables the logging of model parameters, metrics, and artifacts, facilitating easier monitoring of model performance over time and comparisons between different runs.
+- **Performance**: Both models provide coherent, relevant responses, optimizing retrieval effectiveness.
+- **Speed**: Compact model sizes facilitate faster processing, crucial for real-time applications.
 
+Detailed results from model experimentation can be found in the `MLflow` logs.
 
----
+### Embedding Model Selection
 
-### 4. **What model would you use for this use case? Why?**
+The **text-embedding-ada-002** model was chosen for generating embeddings, striking a balance of size and performance. This model optimizes tasks like text search and similarity with minimal computational overhead.
 
-**Answer**:  
-For this use case, I experimented with the llama-3.1-8b and Mixtral-7x8B models, focusing on their size and performance:
+## Handling Out-of-Vocabulary (OOV) Terms
 
-•	Size and Speed: Both models are compact, allowing for faster processing—essential for real-time applications.
+The system addresses OOV terms through contextual embeddings from the **text-embedding-ada-002** model, along with **Qdrant** for retrieval:
 
-•	Performance: They deliver coherent and relevant responses, significantly enhancing the system's ability to retrieve information effectively.
+- **Contextual Embeddings**: Allows inference of OOV terms by capturing nuances from surrounding words.
+- **Vector Store Retrieval**: Finds semantically similar terms to generate context-aligned responses.
+- **Continuous Learning**: Potential to ingest new data progressively, enhancing vocabulary and adaptability.
 
-•	Open-source and free
+## Self-Hosting and Deployment Considerations
 
-The Llama-3.1-8B and Mixtral-7x8B models strike an excellent balance between speed and effectiveness, making them ideal for this proof of concept. Notably, Mixtral outperformed Llama in the experiments, and detailed results can be found in the experiments folder or in the MLflow runs.
+While self-hosting is not required for this POC, **Qdrant** supports regional selection within the U.S., meeting data compliance needs for internal documentation. The project is currently run locally with embedding and LLM APIs accessed remotely, with potential for Docker-based cloud deployment in future stages.
 
+## Document Chunking
 
-#### (a) **What did you use for your embeddings? How does that decision affect the performance of your system?**
+Documents were segmented using **Langchain’s RecursiveCharacterTextSplitter** to balance context preservation and processing efficiency. Experiments showed improvements in chunking performance with adjustments to chunk size and overlap, refined with **ChunkViz** for optimal results.
 
-**Answer**:
-I used text-embedding-ada-002 for generating embeddings. The main reasoning is that it is considered a small model compared to larger models like Davinci. Its design focuses on providing high performance in tasks such as text and code search, text similarity, and more, while maintaining a smaller size and lower resource requirements. This smaller model size allows for faster inference times and easier integration into applications without the computational overhead.
+## Production-Readiness Enhancements
 
----
+To ensure production readiness:
 
-### 5. **How does your system handle out-of-vocabulary (OOV) terms?**
+- Additional testing with larger datasets to identify the best embeddings and LLM combinations.
+- Cloud deployment with Docker and an enhanced user interface (UI) for improved user experience.
+- Regularly updating embeddings and vector store content to ensure responses remain accurate with documentation changes.
 
-**Answer**:  
-The system could handle out-of-vocabulary (OOV) terms by utilizing embeddings generated from “text-embedding-ada-002” model alongside the Qdrant vector store:
+## Adaptation to Changing Information
 
-•	Contextual Embeddings: OOV terms are processed through embeddings that capture the nuances of surrounding words, enabling the model to infer meanings even in the absence of specific vocabulary.
+Currently, the system does not handle changes in documentation automatically. However, updates can be managed by refreshing the vector store with new embeddings, potentially adding a document check mechanism to identify updates and new content.
 
-•	Vector Store Retrieval: Qdrant retrieves semantically similar known terms and phrases, allowing the system to generate relevant responses that are contextually aligned.
+## System Evaluation
 
-•	Continuous Learning: While the system currently processes existing vocabulary, it has the potential to address OOV terms by incorporating new data during the ingestion phase, thereby progressively expanding its vocabulary and enhancing adaptability.
+The **RAGAS** framework was used to evaluate the system using the following key metrics:
 
+1. **Faithfulness**: Measures how well the answer aligns with the provided context (scaled 0-1).
+2. **Answer Relevancy**: Assesses relevance to the prompt using cosine similarity.
+3. **Context Utilization**: Evaluates the effectiveness of retrieval based on answer relevance.
 
----
+### Information Retrieval Evaluation
 
-### 6. **Would you need to self-host? Explain your decision.**
+**Context utilization** metric measures retrieval precision by evaluating if answer-relevant items rank higher in retrieval, with higher scores indicating better precision.
 
-**Answer**:  
+### Production Evaluation Considerations
 
-Self-hosting data is not necessary for this proof of concept (POC) because I am utilizing Qdrant, which supports regional selection within the U.S., a crucial requirement for managing sensitive internal documentation that must comply with geographical regulations. For this example, I am currently using the free plan, which limits deployment to the EU-East region, while a paid hosting option for the US-West region is available through AWS at a rate of $0.03566 per hour. The code is currently running locally, with the embedding and LLM models accessed via APIs. Additionally, monitoring with MLflow is conducted locally, and there is potential for future cloud implementation
+For production, larger datasets with ground truth data are necessary to benchmark performance in real-world scenarios, providing a more robust system validation.
 
 ---
 
-### 7. **How did you chunk the documents provided? Does this decision have any effect on the performance of the system?**
-
-**Answer**:  
-
-I utilized Langchain's RecursiveCharacterTextSplitter to segment documents into coherent paragraphs. Through experimentation with chunk size and overlap, I sought the optimal balance between context preservation and processing efficiency. Additionally, I explored the ChunkViz tool to refine my approach to data segmentation, ultimately deciding to leverage sentence embeddings. Results in exp3 show that there is moderate improvement in comparison with exp4 where only the chunk size was changed from 900 to 1500 and the overlap from 150 to 100.
-
----
-
-### 8. **What is missing for your solution to be production-ready?**
-
-To make the solution production-ready, additional testing is required to identify the optimal combination of embeddings and large language models (LLMs). This includes evaluating accuracy and monitoring processing times to ensure efficiency and reliability in real-world applications. Furthermore, it is crucial to test with larger internal datasets to comprehensively assess overall performance and accuracy. 
-Additionally, the solution will be prepared for deployment to the cloud using Docker, and efforts will be made to create a user-friendly application with an enhanced user interface (UI) to improve the overall user experience.
-  
-
----
-
-### 9. **Is your system able to handle changing information? What would happen if the documentation is updated?**
-
-**Answer**:  
-
-Currently, the system cannot handle changing information effectively. When the documentation is updated, the system is unable to generate answers to user questions based on the latest information. However, if the documentation is updated, the vector store can be refreshed by reprocessing the new content and updating the embeddings. By regularly refreshing the data and embeddings, the system can provide users with current and relevant information, allowing it to adapt effectively to any changes in the documentation. A better option would be to employ a mechanism that checks for the existence of documents and updates only the new content.
-
----
-
-### 10. **How can you evaluate your system?**
-
-**Answer**:  
-For evaluation, I utilized the RAGAS framework to calculate three key metrics: Faithfulness, Answer Relevancy, and Context Utilization. I employed an LLM with a higher number of trainable parameters, specifically the Mistral-large-latest model with 128 billion parameters and the Llama3-70B-8192. By using an LLM as a judge, I don’t need user-provided ground-truth to evaluate the system. This is benefitial when there is lack of labeled data especially for problems such as in the assignment.
-Faithfulness measures how consistently the generated answer reflects the provided context, with scores scaled from (0,1) where higher values indicate better alignment. An answer is deemed faithful if all its claims can be inferred from the context.
-Answer Relevancy assesses the relevance of the generated answer to the prompt. Lower scores indicate incomplete or redundant answers, while higher scores reflect better pertinence. This is calculated as the mean cosine similarity between the original question and artificially generated questions based on the answer.
-Lastly, Context Utilization evaluates the effectiveness of the retrieval process. I chose the RAGAS framework for its user-friendly interface and straightforward implementation. 
-
-#### (a) **How do you evaluate your information retrieval system?**
-
-**Answer**:  
-I used the context utilization to evaluate the retrieval system. Context utilization is a metric that evaluates whether all of the answer relevant items present in the contexts are ranked higher or not. Ideally all the relevant chunks must appear at the top ranks. This metric is computed using the question, answer and the contexts, with values ranging between 0 and 1, where higher scores indicate better precision.
-
-#### (b) **What would need to be different between evaluation during development and for production?**
-
-**Answer**:  
-In production, evaluation would require larger datasets for testing, potentially incorporating ground truth data to establish benchmarks for performance. This ensures that the system is validated against real-world scenarios, providing a more robust assessment of its effectiveness compared to the smaller test sets used during development.
-
-
----
-
+For more details, see the experiment logs in `MLflow` and refer to the `experiments` folder.
