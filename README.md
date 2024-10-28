@@ -87,9 +87,7 @@ MyDocAssistant
 ```
 
 
-# AWS Sagemaker Documentation Search System (RAG-based)
-
-This project develops a system to facilitate efficient search through AWS Sagemaker documentation, initially focused on a small subset of this documentation. The system minimizes manual browsing by delivering quick, accurate search results and supports future integration with internal, sensitive documentation while maintaining compliance with data management and geographical restrictions.
+#Detailed explanation
 
 ## Key Project Objectives
 
