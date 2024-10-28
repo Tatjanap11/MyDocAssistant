@@ -87,7 +87,7 @@ MyDocAssistant
 ```
 
 
-#Detailed explanation
+# Detailed explanation
 
 ## Key Project Objectives
 
